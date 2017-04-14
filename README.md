@@ -27,7 +27,7 @@ The reset function is probably the hardest part of setting up TimeCafe but once 
 
 Create a file to hold your reset functionality. Remember that this is the untimed functionality that will run between timed tests. It can still have assertions in it of course.  Let's call this `login.js` (note that we don't include .test.js as the extension since it will be imported into our tests). All our reset function is doing is saying that between tests we want the browser to go back to the login page.
 
-```
+```javascript
 import { Selector } from 'testcafe';
 import timecafe from 'timecafe';
 
@@ -52,7 +52,7 @@ Ok, we've got `login.js` done so now we just need to use it in our tests.
 
 First, if you don't already have a file to put your tests in, let's do so now. Create `index.test.js` and add something resembling the following. Note the selectors being used are based on an Angular 1 app so you should swap them out with your own:
 
-```
+```javascript
 import { Selector } from "testcafe";
 import {time} from './login';
 
@@ -88,7 +88,7 @@ You can execute your tests with `$(npm bin)/testcafe chrome ./index.test.js -e`
 
 And you should expect output that looks like this:
 
-```
+```bash
 Running tests in:
 - Chrome 57.0.2987 / Mac OS X 10.12.4
 
@@ -102,8 +102,13 @@ Admin Testing
 ```
 
 Note that due to current limitations the time actually is recorded directly before the test name.
-## Notes
+
+## Additional notes
 
 Internally we use node's high resolution timing function `process.hrtime()`.
 
 Ironically tests don't exist.
+
+## Author
+
+Jim Cummins ([@jimthedev](https://twitter.com/jimthedev))
