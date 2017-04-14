@@ -1,22 +1,22 @@
 // RESET function, NOTE THIS IS OFTEN IMPURE
 // What meta info do you want performed? Good for timing handling
 //
-var i = 0;
-var lastTime;
+var hrstart, hrend;
 export const reset = async (t, fn) => {
-  console.log('reset run');
   // FINISH TIMING THE LAST TEST
-  if (i > 0) {
-    console.timeEnd("test" + i);
-  } else {
-    i++;
-    console.log('incremented i to ', i);
+  if (hrstart) {
+    console.log("\n\n")
+    //console.timeEnd('   '  + i);
+    hrend = process.hrtime(hrstart);
+    console.log("   Done in " + (hrend[0] + hrend[1]/1000000000) + 's.');
   }
+
   // THIS FUNCTION IS UNTIMED BECAUSE IT IS RESET TIME
   await fn(t);
   // START TIMING AGAIN
   // We're at the beginning of our next test so start the timer
-  console.time("test" + i);
+  //console.time('   '  + i);
+  hrstart = process.hrtime()
 };
 // END RESET FUNCTION
 
@@ -46,10 +46,11 @@ export const createFinish = fn => {
 
 // Creates start and finish functions in the right order since finish relies
 // on start
-export const timecafe = fn => {
+const timecafe = fn => {
   const start = createStart(fn);
   return {
     start,
     finish: createFinish(start)
   }
 }
+export default timecafe;

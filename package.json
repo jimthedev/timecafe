@@ -1,13 +1,14 @@
 {
   "name": "timecafe",
-  "version": "1.0.1",
-  "description": "",
-  "main": "src/index.js",
+  "version": "1.1.0",
+  "description": "Timing / performance information for your TestCafe test tasks.",
+  "main": "lib/index",
   "files": [
     "lib"
   ],
   "scripts": {
     "build": "babel src -d lib",
+    "shipit": "yarn build && yarn publish",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -23,6 +24,7 @@
   "homepage": "https://github.com/jimthedev/timecafe#readme",
   "devDependencies": {
     "babel-cli": "^6.24.1",
+    "babel-plugin-transform-runtime": "^6.23.0",
     "babel-preset-env": "^1.4.0"
   }
 }
